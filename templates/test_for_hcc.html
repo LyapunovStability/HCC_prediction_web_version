@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+	<meta http-equiv="Content-Type" charset="utf-8" />
+	<title>
+		Machine Learning methods for HCC 
+	</title>
+</head>
+<style>
+  #train_lower_percent{
+	background: AliceBlue;
+  }
+   
+   body{
+            background-color: pink;
+  }
+  #detail_run{
+	    font-size: 16px ;
+  }
+  
+</style>
+
+
+<body class="beige_jpg">
+<blockquote>
+<p>&nbsp;</p>
+<p class='align_right'>
+&nbsp;&nbsp;&nbsp;</p>
+
+<table bgcolor="white" cellpadding='50' class='bgcolor_white' width='100%'  summary='test'>
+<tr>
+<td class='bgcolor_white'>
+
+<table border="0" cellpadding="15"  summary="?" >
+<tr>
+<td align='left'>
+<h1> Machine Learning methods for HCC</h1>
+</td>
+</tr>
+</table>
+
+
+
+<form action="" enctype='multipart/form-data' method='POST'>
+
+<blockquote>
+	<h2>1. Upload a data file (.csv)</h2>
+	<p class='texte'>
+	You should firstly upload a data file called <strong>xxxxx.csv</strong>.
+	</p>
+	
+	<input type="file" size="100" name="file">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="submit" name="upload_file",value="upload">
+
+	{{ captcha() }} <!-- This renders an <img> tag with the captcha img. -->
+    <input type="text" name="captcha">
+    <input type="submit">
+	
+</blockquote>
+
+<blockquote>
+<h2>2. Choose a Model</h2>
+<p class='texte'>
+Please choose a model from <strong>Logistic regression,Ridge regression,AdaBoost,Decision tree, Random Forest </strong>.
+</p>
+<select name = "select_table" id="mySelect">
+  <option value ="logistic_regression">Logistic regression</option>
+  <option value ="ridge_regression">Ridge regression</option>
+  <option value="adaboost">AdaBoost</option>
+  <option value="decision_tree">Decision tree</option>
+  <option value="random_forest">Random Forest</option>
+</select>
+
+</blockquote>
+
+
+
+<blockquote>
+<h2>3. Run the Model</h2>
+<p class='texte'>
+The <strong>Train</strong> and <strong> Test </strong>process will automatically run.
+</p>
+<input type="submit" name="select_table_submit" value="Run the model">
+<p>
+<textarea  name='detail_run' class='cadrejaune' id='detail_run' rows='8' cols='60'>
+{{ url1.get("link") }}
+</textarea>
+</p>
+
+</form>
+
+
+
+<table border="0" cellpadding="10"  summary="?" >
+	<tr>
+		<td align='left'>
+			<table border="1" cellpadding="20" class='collapse' summary="?" >
+				<thead>
+				<tr>
+					<th >train</th>
+					<td colspan="2" align='center'><input type='text' size="30" id='train_num_sample' name='train_num_sample' value={{ task.get("train_num_sample") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+				</tr>
+				</thead>
+				<tr>
+					<td align='left'><span  class='gbleuf'>lower cut-off&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='train_lower_cutoff' name='train_lower_cutoff' value= {{ task.get("train_lower_cutoff") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+					<td align='left'><span  class='gbleuf'>upper cut-off&nbsp;&nbsp;</span></td>
+					<td align='right'><font color="#FF0000"><input type='text' id='train_upper_cutoff' name='train_upper_cutoff' value={{ task.get("train_upper_cutoff") }}  size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+				</tr>
+				<tr>
+					<td align='left'><span  class='gbleuf'>n(%)&nbsp;&lt;lower cut-off &nbsp;&nbsp;</span></td>
+					<td align='right'><font color="#FF0000"><input   id='train_lower_percent' name='train_lower_percent' value={{ task.get("train_lower_percent") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+					<td align='left'><span  class='gbleuf'>n(%)&nbsp; &gt;upper cut-off&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='train_upper_percent' name='train_upper_percent' value={{ task.get("train_upper_percent") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+
+				</tr>
+				<tr>
+					<td align='left'><span  class='gbleuf'>Sensitivity &nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='train_lower_sensitivity' name='train_lower_sensitivity' value={{ task.get("train_lower_sensitivity") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+					<td align='left'><span  class='gbleuf'>Sensitivity&nbsp;&nbsp;</span></td>
+					<td align='right'><font color="#FF0000"><input type='text' id='train_upper_sensitivity' name='train_upper_sensitivity' value={{ task.get("train_upper_sensitivity") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+
+				</tr>
+				<tr>
+					<td align='left'><span  class='gbleuf'>Specificity &nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='train_lower_specificity' name='train_lower_specificity' value={{ task.get("train_lower_specificity") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+					<td align='left'><span  class='gbleuf'>Specificity&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='train_upper_specificity' name='train_upper_specificity' value={{ task.get("train_upper_specificity") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+
+				</tr>
+				<tr>
+					<td align='left'><span  class='gbleuf'>PPV &nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='train_lower_ppv' name='train_lower_ppv' value={{ task.get("train_lower_ppv") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+					<td align='left'><span  class='gbleuf'>PPV&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='train_upper_ppv' name='train_upper_ppv' value={{ task.get("train_upper_ppv") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+
+				</tr>
+				<tr>
+					<td align='left'><span  class='gbleuf'>NPV &nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='train_lower_npv' name='train_lower_npv' value={{ task.get("train_lower_npv") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+					<td align='left'><span  class='gbleuf'>NPV&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='train_upper_npv' name='train_upper_npv' value={{ task.get("train_upper_npv") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+
+				</tr>
+				<thead>
+				<tr>
+					<th >test</th>
+					<td colspan="2" align='right'><input type='text' id='test_num_sample' name='test_num_sample' value={{ task.get("test_num_sample") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+				</tr>
+				</thead>
+				<tr>
+					<td align='left'><span  class='gbleuf'>lower cut-off&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='test_lower_cutoff' name='test_lower_cutoff' value={{ task.get("test_lower_cutoff") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+					<td align='left'><span  class='gbleuf'>upper cut-off&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='test_upper_cutoff' name='test_upper_cutoff' value={{ task.get("test_upper_cutoff") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+				</tr>
+				<tr>
+					<td align='left'><span  class='gbleuf'>n(%) &lt;lower cut-off &nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='test_lower_percent' name='test_lower_percent' value={{ task.get("test_lower_percent") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+					<td align='left'><span  class='gbleuf'>n(%) &gt;upper cut-off&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='test_upper_percent' name='test_upper_percent' value={{ task.get("test_upper_percent") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+
+				</tr>
+				<tr>
+					<td align='left'><span  class='gbleuf'>Sensitivity &nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='test_lower_sensitivity' name='test_lower_sensitivity' value={{ task.get("test_lower_sensitivity") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+					<td align='left'><span  class='gbleuf'>Sensitivity&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='test_upper_sensitivity' name='test_upper_sensitivity' value={{ task.get("test_upper_sensitivity") }}  size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+
+				</tr>
+				<tr>
+					<td align='left'><span  class='gbleuf'>Specificity &nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='test_lower_specificity' name='test_lower_specificity' value={{ task.get("test_lower_specificity") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+					<td align='left'><span  class='gbleuf'>Specificity&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='test_upper_specificity' name='test_upper_specificity' value={{ task.get("test_upper_specificity") }}  size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+
+				</tr>
+				<tr>
+					<td align='left'><span  class='gbleuf'>PPV &nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='test_lower_ppv' name='test_lower_ppv' value={{ task.get("test_lower_ppv") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+					<td align='left'><span  class='gbleuf'>PPV&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='test_upper_ppv' name='test_upper_ppv' value={{ task.get("test_upper_ppv") }}  size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+
+				</tr>
+				<tr>
+					<td align='left'><span  class='gbleuf'>NPV &nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='test_lower_npv' name='train_lower_npv' value={{ task.get("train_lower_npv") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+					<td align='left'><span  class='gbleuf'>NPV&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='testupper_npv' name='test_upper_npv' value={{ task.get("test_upper_npv") }} size='8' class='tavert' />
+						&nbsp;&nbsp;</td>
+
+				</tr>
+			</table>
+		</td>
+		<td align='left'>
+			<table border="1" cellpadding="20" class='collapse' summary="?" >
+				<thead>
+				<tr>
+					<th colspan="3" >train</th>
+				</tr>
+				</thead>
+				<tr>
+					<td align='left'><span  class='gbleuf'>AUROC&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='train_auroc' name='train_auroc' value={{ task.get("train_auroc") }} size='8' class='tavert' />
+					&nbsp;&nbsp;</td>
+				</tr>
+				<thead>
+				<tr>
+					<th colspan="3" >test</th>
+				</tr>
+				</thead>
+				<tr>
+					<td align='left'><span  class='gbleuf'>AUROC&nbsp;&nbsp;</span></td>
+					<td align='right'><input type='text' id='test_auroc' name='test_auroc' value={{ task.get("test_auroc") }} size='8' class='tavert' />
+					&nbsp;&nbsp;</td>
+				</tr>
+			</table>
+		</td>
+
+
+
+	</tr>
+</table>
+
+
+</blockquote>
+
+
+
+<blockquote>
+
+
+
+
+
+</form><!-- fin de section (gH) -->
+</td></tr></table>
+<p>&nbsp;</p>
+<!-- fin de page standard (gH) -->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</blockquote>
+</body>
+</html>
