@@ -25,19 +25,6 @@ captcha = FlaskSessionCaptcha(app)
 
 
 
-def test():
-  fin = open(r'templates\upload.html', 'r')
-  fout = open(r'templates\test.html', 'w')
-
-  for line in fin:
-    if line.strip() == '</body>':
-      fout.write('\t\t<h1>ceshi</h1>\n')
-    fout.write(line)
-
-
-#https://www.javaroad.cn/questions/6410
-#https://blog.csdn.net/qq_44741960/article/details/106142305
-
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -106,7 +93,7 @@ def upload():
             task = algorithm_test.exe_model(model=MODEL_CHOICE[request.form.get("select_table")], data_path=upload_path, ratio=0.3, predicting_year=5)
             print(task)
             url1["link"] = "you may download output from: " + r"http://127.0.0.1:5000/download/Test.csv"
-            download(r"D:\Code\WebPage_Test\Test.csv")
+
         if "run" in keys:
             print("test")
 
@@ -114,18 +101,9 @@ def upload():
         return render_template('test_for_hcc.html',task=task,url1=url1)
 
 
-
-        #test()
-        #return render_template('test.html')
-        #return redirect(url_for('upload'))
-
     return render_template('test_for_hcc.html',task=task, url1=url1)
 
 
-
-@app.route('/download/<path:filename>',methods=['get'])
-def download(filename):
-    return send_file(filename,as_attachment=True,attachment_filename='Test.csv')
 
 
 
