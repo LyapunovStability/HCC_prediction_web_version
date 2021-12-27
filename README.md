@@ -1,6 +1,6 @@
 # HCC_prediction_web_version
 
-The web version of HCC () prediction algorithm
+The web version of HCC (hepatic cell carcinoma：原发性肝癌) prediction algorithm
 
 
 
